@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "artifacts": "^0.0.1",
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.7",
+    "ethereumjs-tx": "^2.1.2",
+    "express": "^4.18.0",
+    "truffle": "^5.5.11",
+    "web3": "^1.7.3",
+    "web3-eth-accounts": "^1.7.3"
+  },
+  "name": "certificate",
+  "version": "1.0.0",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
