@@ -1,0 +1,15 @@
+admin
+ - view institutes  
+ - remove institutes
+
+institute
+ - institute login
+ - student dashboard
+ - update details
+ - remove certificate
+
+student
+ - student login
+ - student dashboard
+ - edit details
+ - view cerificates

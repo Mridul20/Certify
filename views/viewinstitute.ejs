@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+  </head>
+  <body>
+
+<div class="container" style="text-align: center ; padding-top: 3%">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<div class="table-responsive">
+				<table class="table user-list">
+					<thead>
+						<tr>
+							<th><span>Institutes</span></th>
+              <th><span>Acronym</span></th>
+							<th><span>Courses offered</span></th>
+              <th><span>Link</span></th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+            <% for(var i = 0;i < inst.length;i++) { %>
+						<tr>
+                <td class="text-center">
+  								<span class="label label-default"><%= inst[i].name %></span>
+  							</td>
+							<td>
+								<span class="label label-default"><%= inst[i].acr %></span>
+							</td>
+							<td class="text-center">
+                <% let str="" %>
+                <% for(var j = 0;j < inst[i].course.length;j++) { %>
+                  <%str=str+inst[i].course[j] + "    " %>
+                <% } %>
+								<span class="label label-default"><%= str %></span>
+							</td>
+							<td>
+								<a href="#"><%= inst[i].link %></a>
+							</td>
+						</tr>
+            <% } %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+  </body>
+</html>
