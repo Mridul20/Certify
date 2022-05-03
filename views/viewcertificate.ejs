@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title></title>
+    <title>Login V20</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -104,32 +104,53 @@
     </script>
   </head>
   <body>
-    <!-- <a href="/">hello</a> -->
-
-    <div class="limiter">
-      <div style="text-align: center;margin-top: 3%;"><span  class="login100-form-title p-b-43"> ADMIN : <%=id%> </span></div>
-      <div style = "padding-top: 0;" class="container-login100">
-        <div style = "padding-top: 0;"class="wrap-login100 p-b-160">
-          <!-- <form class="login100-form validate-form"> -->
-            
-            
-            <div
-              class="container-login100-form-btn"
-              style="margin: 4%;   border-top-right-radius: 100px"
-            >
-              <button class="login100-form-btn"><a href = "/addinstitute" style="color: white;">Add Institute</a></button></a>
-            </div>
-            <div class="container-login100-form-btn" style="margin: 4%">
-              <button class="login100-form-btn"><a href = "/viewinstitute" style="color: white;">View institutes</a></button>
-            </div>
-            <div class="container-login100-form-btn" style="margin: 4%">
-              <button class="login100-form-btn"><a href = "/removeinstitute" style="color: white;">Remove institutes</a></button>
-            </div>
-          <!-- </form> -->
+    <div
+      class="container"
+      style="display: flex; justify-content: center; margin-top: 3%"
+    >
+      <div
+        style="
+          width: 800px;
+          height: 600px;
+          padding: 20px;
+          text-align: center;
+          border: 10px solid #787878;
+        "
+      >
+        <div
+          style="
+            width: 750px;
+            height: 550px;
+            padding: 20px;
+            text-align: center;
+            border: 5px solid #787878;
+          "
+        >
+          <span style="font-size: 50px; font-weight: bold"
+            >Certificate of Completion</span
+          >
+          <br /><br />
+          <span style="font-size: 25px"><i>This is to certify that</i></span>
+          <br /><br />
+          <span style="font-size: 30px"><b><%= name %></b></span
+          ><br /><br />
+          <span style="font-size: 25px"><i>has completed the course</i></span>
+          <br /><br />
+          <span style="font-size: 30px"><%= course %></span> <br /><br />
+          <span style="font-size: 20px"
+            >Institute <%= institute %></b></span
+          >
+          <br /><br /><br /><br />
+          <span style="font-size: 25px"><i>Duration </i></span
+          ><br />
+          
+          <span style="font-size: 30px"><%= duration %></span>
         </div>
       </div>
     </div>
-
+    <div style="margin-left: 10%;">
+      <button onclick="window.print()">Print Certificate</button>
+    </div>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 
     <script src="vendor/animsition/js/animsition.min.js"></script>

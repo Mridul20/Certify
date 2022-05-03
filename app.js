@@ -351,13 +351,13 @@ const abi =   [
   }
 ]
 
-  const coa =  '0xDacCAAe834559F630c46382a826eFFFea9A82F69';
+  const coa =  '0x902195c87A1e1F44f5d02f6c2cf07e61c87Be74F';
 
 
   var contract = new web3.eth.Contract(abi,coa);
 
 
-  // console.log(contract.methods);
+  console.log(contract.methods);
 
 let adminad = "0";
 let institutead = "0";
@@ -366,27 +366,48 @@ app.get("/",function(req,res){
     res.render("home");
 });
 
+app.get("/viewcertificate/:add",function(req,res){
+  contract.methods.viewCertificate(req.params.add).call(function(err,resu){
+    if(err)
+      console.log(err);
+    console.log(resu);
+    res.render("viewcertificate",{name:resu['stud'],course : resu['course'],duration : resu['duration'],institute : resu['inst']});
+  });
+});
+
+app.post("/",function(req,res){
+  var add = req.body.addr;
+  res.redirect("/viewcertificate/" + add);
+})
+
 app.get("/adminlogin",function(req,res){
     res.render("adminlogin");
 });
 
 app.get("/admin/:id",function(req,res){
   var id = req.params.id;
-  adminad = id;
-  res.render("admin",{id: id});
+  web3.eth.getAccounts().then(function(result) {
+    if(id == result[0])
+    {
+      adminad = id;
+      return res.render("admin",{id: id});
+    }
+    res.redirect("/");
+  });
+  
 });
 
 app.post("/adminlogin",function(req,res){
-  return res.redirect("/admin/" + req.body.id);
+  return res.redirect("/admin/" + req.body.address);
 });
 
 app.get("/addinstitute",function(req,res){
-  res.render("addinstitute");
+  res.render("addinstitute",{account:"NULL"});
 });
 
 app.post("/addinstitute",function(req,res){
-  console.log(req.body);
-  var courses = ["a","b"];
+  // console.log(req.body);
+  var courses = ["AI","BCC"];
 
   web3.eth.personal.newAccount() 
   // console.log("admin : ");
@@ -399,8 +420,7 @@ app.post("/addinstitute",function(req,res){
       if(err)
         console.log(err);
     });
-
-    res.render("admin",{id: adminad});
+    res.render("addinstitute",{account:hash});
   });
 });
 
@@ -429,150 +449,109 @@ app.post("/removeinstitute",function(req,res){
   });
 });
 
-app.get("/updateinstitute",function(req,res){
-  res.render("updateinstitute");
-})
 
 app.get("/institutelogin",function(req,res){
   res.render("institutelogin");
 });
 
 app.get("/institute/:id",function(req,res){
-var id = req.params.id;
-institutead = id;
-res.render("institute",{id: id});
-});
-
+  var id = req.params.id;
+  institutead = id;
+  console.log(institutead);
+  res.render("institute",{id: id});
+}); 
 
 app.post("/institutelogin",function(req,res){
-return res.redirect("/institute/" + req.body.id);
+  return res.redirect("/institute/" + req.body.username);
 });
+
 app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
 });
 
-// app.post("/updateinstitute",function(req,res){
-//   console.log(req.body);
-//   var courses = ["a","b"];
+app.get("/updateinstitute",function(req,res){
+  res.render("updateinstitute");
+})
+
+app.post("/updateinstitute",function(req,res){
+  console.log(req.body);
+  var courses = ["AI","BCC"];
+  contract.methods.updateInstitute(institutead,req.body.name,req.body.acr,req.body.webl,courses)
+  .send({from : institutead,gasPrice : 1, gas : 6721975},function(err){
+    if(err)
+      console.log(err);
+  });
+  res.render("institute",{id: institutead});
+});
+
+app.get("/addstudent",function(req,res){
+  res.render("addstudent",{account : "NULL"});
+});
+
+app.post("/addstudent",function(req,res){
+  var name = req.body.name;
+
+  web3.eth.personal.newAccount() 
+  web3.eth.getAccounts().then(function(result) {
+    var hash = result[result.length-1];
+    console.log(hash);
+    contract.methods.addStudent(hash,name)
+    .send({from : result[0],gasPrice : 1, gas : 6721975},function(err){
+      if(err)
+        console.log(err);
+    });
+    res.render("addstudent",{account:hash});
+  });
+})
+
+app.get("/gencertificate",function(req,res){
+  res.render("gencertificate",{account:"NULL"});
+})
+
+app.post("/gencertificate",function(req,res){
+
+  web3.eth.personal.newAccount() 
+  web3.eth.getAccounts().then(function(result) {
+    var hash = result[result.length-1];
+    // console.log(hash);
+    contract.methods.issueCertificate(hash,institutead,req.body.studad,req.body.course,req.body.dur)
+    .send({from : result[0],gasPrice : 1, gas : 6721975},function(err){
+      if(err)
+        console.log(err);
+    });
+    res.render("gencertificate",{account:hash});
+  });  
+});
+
+app.get("/remcertificate",function(req,res){
+  res.render("remcertificate");
+});
+
+app.post("/remcertificate",function(req,res){
+  var add = req.body.addr;
   
-//   web3.eth.personal.newAccount() 
-//   // console.log("admin : ");
-//   // console.log(adminad);
-//   web3.eth.getAccounts().then(function(result) {
-//     var hash = result[result.length-1];
-//     console.log(hash);
-//     contract.methods.addInstitute(hash,req.body.name,req.body.acr,req.body.webl,courses)
-//     .send({from : result[0],gasPrice : 1, gas : 6721975},function(err){
-//       if(err)
-//         console.log(err);
-//     });
-
-//     res.render("admin",{id: adminad});
-//   });
-// });
-  // contract.methods.createStudent(3,20,"mridul","mittal").send({from : account1,gasPrice : 1, gas : 6721975});
-
-  // contract.methods.getParticularStudent(3).call(function(err,res){
-  //   if(err)
-  //   {
-  //     console.log("errr");
-  //   }
-  //   console.log(res);
-  // })
-  
-  // web3.eth.personal.newAccount() 
-  // web3.eth.accounts.create();
-  // console.log(web3.eth.accounts);
-  // web3.eth.getAccounts().then(function(res) {
-  //   document.getElementById("para1").innerHTML = res;
-  //   console.log(res);
-  // });
-  
-
-//   app.get("/", function(req, res){
-//     res.render("home");
-//   });
-//   app.get("/addcollege",function(req,res){
-//     res.render("addcollege");
-//   });
-
-//   app.post("/addcollege",function(req,res){
-//     var name = req.body.name;
-//     web3.eth.personal.newAccount() 
-//     web3.eth.getAccounts().then(function(result) {
-//       var hash = result[result.length-1];
-//       console.log(hash);
-//       contract.methods.addCollege(hash,name).send({from : result[0],gasPrice : 1, gas : 6721975});
-//       res.render("showhash",{hash: hash});
-//     });
-//   });
-
-//   app.get("/viewcollege",function(req,res){
-//       res.render("viewcollege",{clgname:"NULL",clgid :"NULL"});
-//   })
-
-//   app.post("/viewcollege",function(req,res){
-//     var id = req.body.hash;
-//     web3.eth.getAccounts().then(function(result) {
-//         var hash = result[result.length-1];
-//         contract.methods.checkcoll(id).call(function(err,resu){
-//             res.render("viewcollege",{clgname:resu[0],clgid : resu[1]});
-//         })
-//       });
-//   });
-  
-//   app.get("/addcertificate",function(req,res){
-//       res.render("addcertificate");
-//   })
-
-//   app.post("/addcertificate",function(req,res){
-//       var instid = req.body.instid;
-//       var name = req.body.name;
-//       var course = req.body.course;
-//       var dur = req.body.duration;
-//       web3.eth.personal.newAccount() 
-//       web3.eth.getAccounts().then(function(result) {
-//         var hash = result[result.length-1];
-//         contract.methods.addcert(instid,name,course,dur,hash).send({from : result[0],gasPrice : 1, gas : 6721975});
-//         res.render("showhash",{hash: hash});
-//       });
-//   })
-
-//   app.get("/viewcertificate",function(req,res){
-//     res.render("viewcertificate",{name:"NULL",course:"NULL",duration : "NULL"});
-// })
-
-// app.post("/viewcertificate",function(req,res){
-//   var id = req.body.hash;
-//   web3.eth.getAccounts().then(function(result) {
-//       contract.methods.viewcert(id).call(function(err,resu){
-//         //   console.log(resu);
-//           res.render("viewcertificate",{name:resu[0],course : resu[1],duration : resu[2]});
-//       })
-//     });
-// });
+  contract.methods.revCertificate(add).call(function(err,resu){
+    if(err)
+      console.log(err);
+    return res.redirect("/institute/" + instad);
+  });
+});
 
 
-//   app.get("/admin",function(req,res){
-//     res.render("admin")
-//   })
+app.get("/studentlogin",function(req,res){
+  res.render("studentlogin");
+});
 
-// //   app.post("/", function(req, res){
-// //     var name = req.body.name;
-// //     var id = req.body.id;
-// //     var age = req.body.age;
-// //     web3.eth.personal.newAccount() 
-// //     // web3.eth.accounts.create();
-// //     web3.eth.getAccounts().then(function(result) {
-// //       var hash = result[result.length-1];
-// //       console.log(result);
-// //       contract.methods.createStudent(3,20,"mridul","mittal",hash).send({from : result[0],gasPrice : 1, gas : 6721975});
-// //       res.render("showhash",{hash: hash});
-// //     });
-    
-// //   });
-  
-  
-//   app.listen(process.env.PORT || 3000, function() {
-//     console.log("Server started on port 3000");
-//   });
+app.get("/student/:id",function(req,res){
+    var id = req.params.id;
+    contract.methods.viewStudCert(id).call(function(err,resu){
+      if(err)
+        console.log(err);
+        return res.render("student",{id: id},{certi : resu});
+    });
+
+});
+
+app.post("/studentlogin",function(req,res){
+return res.redirect("/student/" + req.body.address);
+});

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title></title>
+    <title>Login V20</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -104,28 +104,23 @@
     </script>
   </head>
   <body>
-    <!-- <a href="/">hello</a> -->
-
     <div class="limiter">
-      <div style="text-align: center;margin-top: 3%;"><span  class="login100-form-title p-b-43"> ADMIN : <%=id%> </span></div>
-      <div style = "padding-top: 0;" class="container-login100">
-        <div style = "padding-top: 0;"class="wrap-login100 p-b-160">
-          <!-- <form class="login100-form validate-form"> -->
-            
-            
+      <div class="container-login100">
+        <div class="wrap-login100 p-b-160 p-t-50">
+          <form method = "post" class="login100-form validate-form">
+            <span class="login100-form-title p-b-43"> Remove Certificate </span>
             <div
-              class="container-login100-form-btn"
-              style="margin: 4%;   border-top-right-radius: 100px"
+              class="wrap-input100 rs1 validate-input"
+              data-validate="Username is required"
+              style="border-top-right-radius: 10px"
             >
-              <button class="login100-form-btn"><a href = "/addinstitute" style="color: white;">Add Institute</a></button></a>
+              <input class="input100" type="text" name="addr" />
+              <span class="label-input100">Certificate Address</span>
             </div>
-            <div class="container-login100-form-btn" style="margin: 4%">
-              <button class="login100-form-btn"><a href = "/viewinstitute" style="color: white;">View institutes</a></button>
+            <div class="container-login100-form-btn">
+              <button type = "submit" class="login100-form-btn">Remove</button>
             </div>
-            <div class="container-login100-form-btn" style="margin: 4%">
-              <button class="login100-form-btn"><a href = "/removeinstitute" style="color: white;">Remove institutes</a></button>
-            </div>
-          <!-- </form> -->
+          </form>
         </div>
       </div>
     </div>
