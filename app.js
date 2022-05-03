@@ -351,7 +351,7 @@ const abi =   [
   }
 ]
 
-  const coa =  '0x902195c87A1e1F44f5d02f6c2cf07e61c87Be74F';
+  const coa =  '0x294Ff11339030dF0409B27C3a338fD5f1154BE8E';
 
 
   var contract = new web3.eth.Contract(abi,coa);
@@ -555,3 +555,8 @@ app.get("/student/:id",function(req,res){
 app.post("/studentlogin",function(req,res){
 return res.redirect("/student/" + req.body.address);
 });
+
+
+app.get("/test",function(req,res){
+  res.render("student");
+})
