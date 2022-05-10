@@ -2,9 +2,9 @@
 ### Description
 
 
-“Blogr” is a web application based on blockchain techonology,which generates and verify certificates thus creating a secure platform for both students and companies. As a large number of students graduate every year, the problem of fake certificates is a big issue. One can easily get fake certificates in India. Companies hiring
+“Certify” is a web application based on blockchain techonology,which generates and verify certificates thus creating a secure platform for both students and companies. As a large number of students graduate every year, the problem of fake certificates is a big issue. One can easily get fake certificates in India. Companies hiring
 thousands of freshers spend large amounts of money to get the educational certificates and transcripts verified of applicants. 
-<br />
+<br /><br />
 A Digital Certificate using blockchain technology can address this problem. 
 
 
