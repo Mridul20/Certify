@@ -48,10 +48,10 @@ Here is a run through of how to set up the application:
 
 # Screenshots
 
-<!-- <img src="https://github.com/Mridul20/VoteIt/blob/main/screenshots/ss1.PNG" alt=""  width="700" height="400" />
-<img src="https://github.com/Mridul20/VoteIt/blob/main/screenshots/ss2.PNG" alt=""  width="700" height="400" />
-<img src="https://github.com/Mridul20/VoteIt/blob/main/screenshots/ss3.PNG" alt=""  width="700" height="400" /> -->
-
+<img src="https://github.com/Mridul20/Certify/blob/2f46b7640ecb35f50aedad38e6b1bb1e65710116/Screenshot/home1.jpg" alt=""  width="700" height="400" />
+<img src="https://github.com/Mridul20/Certify/blob/2f46b7640ecb35f50aedad38e6b1bb1e65710116/Screenshot/profile%20page.jpg" alt=""  width="700" height="400" />
+<img src="https://github.com/Mridul20/Certify/blob/2f46b7640ecb35f50aedad38e6b1bb1e65710116/Screenshot/certificate.jpg" alt=""  width="700" height="400" />
+<img src="https://github.com/Mridul20/Certify/blob/2f46b7640ecb35f50aedad38e6b1bb1e65710116/Screenshot/institute%20dashboard.jpg" alt=""  width="700" height="400" />
 
 ## Author
  **[Mridul Mittal.](https://github.com/Mridul20)**
